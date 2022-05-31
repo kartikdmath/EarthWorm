@@ -47,7 +47,7 @@ class FarmerRegistrationView(View):
 			# return render(request,'/services.html')
 		
 			# return redirect('/farmerregistration')
-			return redirect('login')
+			return redirect('/accounts/login')
 
 def vender_add_product(request):
    totalitem = 0

@@ -26,7 +26,7 @@
              {% endfor %}
              <input type="submit" value="Submit" class="btn btn-primary">
              <br>
-             <div class="text-center text-primary fw-bold"><small>Existing Vendor ? <a href="{% url 'venderlogin' %}" class="text-danger">Vendor Login</a> </small></div>
+             <div class="text-center text-primary fw-bold"><small>Existing Vendor ? <a href="{% url 'login' %}" class="text-danger">Vendor Login</a> </small></div>
              {% if form.non_field_errors %}
               {% for error in form.non_field_errors %}
                <p class="alert alert-danger my-3">{{error}}</p>

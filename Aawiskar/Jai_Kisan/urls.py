@@ -33,7 +33,7 @@ urlpatterns = [
     path('farmer/transport/',views.transport,name='transport'),
     path('tracter/', views.tracter, name='tracter'),
     path('tracter/<slug:data>', views.tracter, name='tracterdata'),
-    path('drones/', views.drones, name='drones'),
+#     path('drones/', views.drones, name='drones'),
     path('drones/<slug:data>', views.drones, name='dronesdata'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='Jai_Kisan/login.html', authentication_form=LoginForm)
          , name='login'),

@@ -94,8 +94,8 @@ def vender_add_product(request):
       if request.user.is_authenticated:
          totalitem = len(VendorProduct.objects.filter(user=request.user))
          print(totalitem)
-         category = request.POST.get('category')
-         brand = request.POST.get('sub_category')
+        #  category = request.POST.get('category')
+        #  brand = request.POST.get('sub_category')
          category1 = request.POST.get('select1')
          brand1 = request.POST.get('select2')
          print(category1)
@@ -126,6 +126,12 @@ def vender_add_product(request):
             #       {'carts': cart, 'totalitem': totalitem})
          else:
             return render(request, 'Jai_Kisan/vender_emptycart.html', {'totalitem': totalitem})
+      # else:
+      #  return render(request, 'Jai_Kisan/vender_emptycart.html', {'totalitem': totalitem})
+   # else:
+   #  return render(request, 'Jai_Kisan/vender_emptycart.html', {'totalitem': totalitem})
+
+
       # else:
       #  return render(request, 'Jai_Kisan/vender_emptycart.html', {'totalitem': totalitem})
    # else:
@@ -206,6 +212,10 @@ class ProductDetailView(View):
 			item_already_in_cart = Item.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
 		return render(request, 'Jai_Kisan/productdetail.html', {'product':product, 'item_already_in_cart':item_already_in_cart, 'totalitem':totalitem})
 
+	def post(self,request,pk):
+		pass
+
+
 @login_required()
 def add_to_cart(request):
 	user = request.user
@@ -229,6 +239,7 @@ def show_cart(request):
 		cart = Item.objects.filter(user=user)
 		amount = 0.0
 		shipping_amount = 70.0
+		# food charge = 100.0
 		totalamount=0.0
 		cart_product = [p for p in Item.objects.all() if p.user == request.user]
 		print(cart_product)
@@ -298,9 +309,9 @@ def minus_cart(request):
 @login_required
 def checkout(request):
 	user = request.user
-	fadd = Farmer.objects.filter(user=user)
+	# fadd = Farmer.objects.filter(user=user)
 	cart_items = Item.objects.filter(user=request.user)
-	uname = Booked.objects.filter(user=user)
+	# uname = Booked.objects.filter(user=user)
 	amount = 0.0
 	shipping_amount = 70.0
 	totalamount=0.0
@@ -312,7 +323,7 @@ def checkout(request):
 			tempamount = (p.duration * p.product.discounted_price)
 			amount += tempamount
 		totalamount = amount+shipping_amount
-	return render(request, 'Jai_Kisan/checkout.html', {'cart_items':cart_items, 'totalcost':totalamount, 'fadd':fadd, 'uname':uname})
+	return render(request, 'Jai_Kisan/checkout.html', {'cart_items':cart_items, 'totalcost':totalamount})
 
 @login_required
 def Booked_placed(request):
@@ -445,10 +456,10 @@ def payment_done(request):
    # print("murli")
    custid = request.GET.get('custid')
    print("Customer ID", custid)
-   user = request.GET.get('user')
+   user = request.user
    cartid = Item.objects.filter(user = user)
-   print(cartid)
-   print(user)
+   print(cartid,"Karthikid")
+   print(user,"UserKarthik")
    cdata = Customer.objects.all()
    custdata = {
 	   	'cdata' : cdata
@@ -458,7 +469,7 @@ def payment_done(request):
    # customer = Customer.objects.get(id=custid)
    # print(customer)
    for cid in cartid:
-      print(cid.product)
+      print(cid.product,"kdproduct")
       Booked(user=user,product=cid.product).save()
    #  print("Order Saved")
    #  cid.delete()

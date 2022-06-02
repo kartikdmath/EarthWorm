@@ -23,17 +23,21 @@
        <h6>Enter Farm Area(in Hectare)</h6>
        <input type="number" required name="price" min="0" value="0" step="any">
       </div>
+      <form  action="{% url 'product-detail' product.id %}" method="post">
+        {% csrf_token %}
       <div class="col-sm-6">
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
-          <label class="form-check-label" for="flexSwitchCheckChecked">Technician support</label>
+        
+        <div class="form-check  form-switch">
+        
+          <input class="form-check-input" value="technician charge" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
+          <label class="form-check-label"  for="flexSwitchCheckChecked">Technician support</label>
         </div>
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" unchecked />
+          <input class="form-check-input" value="food supply" type="checkbox" role="switch" id="flexSwitchCheckDisabled" unchecked />
           <label class="form-check-label" for="flexSwitchCheckDisabled">Food Supply</label>
         </div>
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" unchecked />
+          <input class="form-check-input" value="fuel charge" type="checkbox" role="switch" id="flexSwitchCheckDisabled" unchecked />
           <label class="form-check-label" for="flexSwitchCheckDisabled">Fuel Charges</label>
         </div>
         <div class="form-outline">
@@ -41,6 +45,8 @@
           <input type="text" id="typeText" class="form-control"/>
         </div>
       </div>
+    </form>
+      
 
       </div>
     <h4>Rs. {{product.discounted_price}} <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small></h4> <br>

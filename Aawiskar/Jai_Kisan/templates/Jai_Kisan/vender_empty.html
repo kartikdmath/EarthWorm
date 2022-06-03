@@ -4,7 +4,7 @@
 {% block main-content %}
  <div class="container my-5">
   <div class="row">
-   <h3 class="text-center">You have't added any  Product in Your Profile</h3>
+   <h3 class="text-center">You have't added any  Product in Your Cart</h3>
    <div class="text-center">
     <img src="{% static 'Jai_Kisan/images/emptycart.png' %}" alt="" class="img-fluid img-thumbnail w-25">
 <!--    <div class="col-sm-4">-->
@@ -17,7 +17,7 @@
            <form  action="{% url 'vender-add-product' %}" method="post">
              {% csrf_token %}
              <div>
-                 <h1> Seleted the product</h1>
+                 <h1> Select the Product</h1>
                    <select id ="select" name ="select1"class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                       <option selected name="select11">Select the Product</option>
                       <option value="Tracter">Tracter</option>
@@ -27,7 +27,7 @@
                       <option value="Drones">Drones</option>
                    </select>
                  <br>
-                 <h1> Seleted the brand</h1>
+                 <h1> Select the Brand</h1>
                   <select id ="select2" name="select2" class="form-select form-select-sm" aria-label=".form-select-sm example">
                   <option selected>Select the Brand</option>
                    <option value="AeroVironment Inc.">AeroVironment Inc.</option>

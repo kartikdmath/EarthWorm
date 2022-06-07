@@ -29,8 +29,8 @@
         
         <div class="form-check  form-switch">
         
-          <input class="form-check-input" value="technician charge" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
-          <label class="form-check-label"  for="flexSwitchCheckChecked">Technician support</label>
+          <input class="form-check-input" value="technician charge" type="checkbox" role="switch" id="on">
+          <label class="checkbox" for="on">Technician</label>
         </div>
         <div class="form-check form-switch">
           <input class="form-check-input" value="food supply" type="checkbox" role="switch" id="flexSwitchCheckDisabled" unchecked />
@@ -49,29 +49,31 @@
       
 
       </div>
-    <h4>Rs. {{product.discounted_price}} <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small></h4> <br>
-     
+    <span class="display-6">Rs. {{product.discounted_price}}<span id="info"></span><h5 class="fw-light text-decoration-line-through">{{product.selling_price}}</h5></span> <br>
+    {% for cart in vender_product_details %}
     {% if user.is_authenticated  %}
      {% if item_already_in_cart  %}
-      <a href="{% url 'showcart' %}" class="btn btn-success shadow px-5 py-2 ms-4">Go to Cart</a>
+      <a href="{% url 'showcart' cart.id %}" class="btn btn-success shadow px-5 py-2 ms-4">Go to Cart</a>
      {% else %}
       <form action="/add-to-cart" class="d-inline">
-       <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+       <input type="hidden" name="prod_id" value="{{cart.id}}" id="prod_id">
        <button type="submit" class="btn btn-success shadow px-5 py-2">Confirm Service</button>
       </form>
      {% endif %}
+
     {% endif %}
- 
+
     {% if not request.user.is_authenticated %}
       <form action="/add-to-cart" class="d-inline">
-       <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+       <input type="hidden" name="prod_id" value="{{cart.id}}" id="prod_id">
        <button type="submit" class="btn btn-success shadow px-5 py-2">Confirm Service</button>
       </form>
     {% endif %}
+    {% endfor %}
+
  
  
- 
-    <a href="{% url 'checkout' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Confirm Booking Now</a>
+    {% comment %} <a href="{% url 'checkout' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Confirm Booking Now</a>{% endcomment %}
     <h5 class="mt-5">Available Offers</h5>
     <ul>
      <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>
@@ -80,8 +82,8 @@
     <button type="submit" class="btn btn-success shadow px-5 py-2">Contact Vendor</button>
    </div>
   </div>
- </div>
- <div class="jumbotron jumbotron-fluid">
+</div>
+<div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Technical Specifications</h1>
     <p class="lead">{{product.description}}</p>
@@ -129,6 +131,25 @@
         
   <a class="text-white" href=""></a>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{% static 'Jai_kisan/js/myscript.js' %}"></script>
+<script>
+  $('document').ready(function(){
+    $('#on').on('change',function(){
+        if(this.checked){
+          $("#info").text("+ Rs.50");
+        }
+          else{
+            $("#info").text(" ");
+          }
+      });
+  });
+  
+</script>
+
+{% endblock main-content %}
 
 
 

@@ -9,8 +9,11 @@ from .forms import LoginForm, MyPasswordChangeForm, MyPasswordResetForm, MySetPa
 urlpatterns = [
     # path('', views.index),
     path('', views.ProductView.as_view(), name="home"),
-     path('venderregistration/', views.VenderRegistrationView.as_view(), name="venderregistration"),
-     path('farmerregistration/',views.FarmerRegistrationView.as_view(),name='farmerregistration'),
+    path("about/", views.about, name="AboutUs"),
+    path("contact/", views.contact, name="ContactUs"),
+    path("search/", views.search, name="Search"),
+    path('venderregistration/', views.VenderRegistrationView.as_view(), name="venderregistration"),
+    path('farmerregistration/',views.FarmerRegistrationView.as_view(),name='farmerregistration'),
     path('product-detail/<int:pk>/', views.ProductDetailView.as_view(), name='product-detail'),
     path('venderaddproduct/', views.vender_add_product, name='vender-add-product'),
     path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
